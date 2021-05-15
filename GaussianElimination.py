@@ -9,47 +9,49 @@
 import numpy as np
 import scipy as sp
 
+def create_augmented_matrix(a, b):
+    a, b = a.tolist(), b.tolist()
+    for x in range(len(a)): a[x].append(b[x])
+    return a
+
+
 def gauss(a, b):
-    for i in range(len(a)-1):
+
+    n = len(a)
+    for i in range(0, n):
         a_m = abs(a[i, i])
         p = i
 
-        j = i + 1
-        for j in range(len(a)):
-            if abs(a[j,i]) > a_m:
-                a_m = abs(a[j, i])
+        for j in range(i+1, n):
+            if abs(a[j][i]) > a_m:
+                a_m = abs(a[j][i])
                 p = j
 
         if p > i:
-            k = i
-            for k in range(len(a)):
-                hold_value = a[i, k]
-                a[i, k] = a[p, k]
-                a[p, k] = hold_value
+            for k in range(i, n):
+                hold_value = a[i][k]
+                a[i][k] = a[p][k]
+                a[p][k] = hold_value
             hold_value = b[i]
             b[i] = b[p]
             b[p] = hold_value
         
-        j = i + 1
-        for j in range(len(a)):
-            m = a[j,i]/a[i,i]
-            k = i + 1
-            for k in range(len(a)):
-                a[j,k] = a[j,k] - m*a[i,k]
+        for j in range(i+1, n):
+            m = a[j][i]/a[i][i]
+            for k in range(i+1, n):
+                a[j][k] = a[j][k] - m*a[i][k]
             b[j] = b[j] - m*b[i]
     
-    x = np.zeros(len(b))
-    x[len(a)-1] = b[len(a)-1]/a[len(a)-1, len(a)-1]
+    x = b
+    x[n- 1] = b[n-1]/a[n-1][n-1]
 
-    for i in reversed(range(1)):
+    #for i in reversed(range(n-1)):
+    for i in range(n-1, 0):
         sum = 0
-        j = i + 1
-        for j in range(len(a)):
-            sum += a[i,j]*x[j]
-        x[i] = (b[i] - sum)/a[i,i]
+        for j in range(i+1, n):
+            sum += a[i][j]*x[j]
+        x[i] = (b[i] - sum)/a[i][i]
     return x
-
-
 
 a_a = np.array([[14, 14, -9, 3, -5],
                 [14, 52, -15, 2, -32],
@@ -64,4 +66,4 @@ b_a = np.array([[9, 3, 2, 0, 7],
                 [7, 3, 6, 4, 3]])
 b_b = np.array([35, 58, 53, 37, 39])
 
-print(gauss(a_a, a_b))
+print(gauss(b_a, b_b))
