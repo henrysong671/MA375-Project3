@@ -7,6 +7,7 @@ Project 3B for MA375. This program includes a manually programmed gaussian elimi
 > python3 GaussianElimination.py
 2. Choose option for 3B sample problem A or B, or user-entered matrix equation.
   - Note using user-entered matrix equation: Enter matrix row-by-row, only spaces between values, integers only (for stability), and enter for next row.
+3. Final results are displayed with 4 decimal places.
 
 ## Dependencies
 * NumPy
