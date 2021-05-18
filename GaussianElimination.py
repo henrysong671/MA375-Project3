@@ -1,14 +1,15 @@
 # Henry Song  |  MA375  |  Spring 2021
 # Project #3B: Topic 7 - Solving Systems of Linear Equations
-# File: GaussianElimination .py
+# File: GaussianElimination.py
 # Dependencies: numpy
 # Description: Uses Gaussian elimination to solve a system of linear 
-#              equations (in matrix form). Solves for x when Ax = b.
+#              equations (in matrix form). Solves for x given A & B in 
+#              Ax = B.
 #==========================================================================
 
 import numpy as np
 
-# converts numpy array to list 
+# converts numpy array to python list(easier to work with) 
 def create_augmented_matrix(a, b):
     a, b = a.tolist(), b.tolist()
     for x in range(len(a)): a[x].append(b[x])
@@ -122,6 +123,7 @@ print("Henry Song")
 print()
 
 option = ""
+# continues to loop unless user chooses to quit program
 while option != "5":
     print("1. Use matrix equation A from Project 3B")
     print("2. Use matrix equation B from Project 3B")
@@ -131,7 +133,7 @@ while option != "5":
     option = input("Please select an option: ")
     print()
 
-    if option == "1":
+    if option == "1":   # Performs gaussian elimation on given a_a and a_b matrices
         print("A = ")
         pretty_print_matrix(a_a)
         print()
@@ -141,7 +143,7 @@ while option != "5":
         print("Option 1: x = ", end=" ")
         pretty_print_matrix(gauss(a_a, a_b), flag='row')
         print()
-    elif option == "2":
+    elif option == "2": #Performs gaussian elimination on given b_a and b_b matrices
         print("A = ")
         pretty_print_matrix(b_a)
         print()
@@ -151,7 +153,7 @@ while option != "5":
         print("Option 2: x = ", end=" ")
         pretty_print_matrix(gauss(b_a, b_b), flag='row')
         print()
-    elif option == "3":
+    elif option == "3": #Performs gaussian elimination on user-provided a and b matrices
         a, b = user_input()
         print()
         print("A = ")
@@ -163,7 +165,7 @@ while option != "5":
         print("Option 3: x = ", end=" ")
         pretty_print_matrix(gauss(a, b), flag='row')
         print()
-    elif option == "4":
+    elif option == "4": #Performs gaussian elimination on randomly generated a and b matrices
         a, b = generate_matrix()
         print()
         print("A = ")
