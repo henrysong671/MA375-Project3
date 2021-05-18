@@ -20,7 +20,7 @@ def create_augmented_matrix(a, b):
 # modified to use augmented matrix instead of spearate A & B matrices
 def gauss(a, b):
     aug_matrix = create_augmented_matrix(a,b)   #creates augmented matrix to use for elimination
-    n = len(aug_matrix) #number of columns. Since gaussian elimination uses nxn matricies, this is also size of matrix
+    n = len(aug_matrix) #number of columns + 1. Since gaussian elimination uses nxn matricies, this is also size of matrix + 1 (augmented matrix)
     
     #forward elimination
     for i in range(0, n):
